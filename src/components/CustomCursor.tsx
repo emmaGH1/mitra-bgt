@@ -18,9 +18,10 @@ export default function CustomCursor() {
   const [coords, setCoords] = useState({ mx: -100, my: -100, tx: -100, ty: -100 });
 
   useEffect(() => {
-    // Only enable custom cursor on non-touch (desktop) devices
-    const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
-    if (isTouch) {
+    // Only disable custom cursor on touch-only (mobile/tablet) devices.
+    // Laptops with touchscreens will also support pointer: fine (mouse), so they shouldn't be disabled.
+    const isTouchOnly = window.matchMedia("(pointer: coarse)").matches && !window.matchMedia("(pointer: fine)").matches;
+    if (isTouchOnly) {
       return;
     }
 
@@ -104,16 +105,14 @@ export default function CustomCursor() {
   return (
     <>
       <style>{`
-        @media (min-width: 1024px) {
-          .custom-cursor-active,
-          .custom-cursor-active * {
-            cursor: none !important;
-          }
+        .custom-cursor-active,
+        .custom-cursor-active * {
+          cursor: none !important;
         }
       `}</style>
 
       <div 
-        className="fixed inset-0 pointer-events-none z-[999999] overflow-hidden"
+        className="fixed inset-0 pointer-events-none z-[999999] overflow-hidden text-ink/40 dark:text-cream/40"
         id="custom-tethered-cursor"
       >
         {/* SVG overlay to render the physical tether line between mouse tip and trailing orb */}

@@ -1,31 +1,69 @@
 # MitraBGT // Autonomous US Stock & ETF AI Rebalancing Engine
 
-MitraBGT is an autonomous, decentralized asset rebalancing dashboard designed for Track 3 (US Stock AI Trading) of the Bitget S1 Hackathon. It intercepts real-time Federal Reserve monetary policy announcements and CPI inflation indices, interprets macro sentiment indicators using server-side LLMs, and executes precise, risk-mitigated US stock and ETF portfolio reallocations.
+MitraBGT is an autonomous, context-aware macro trading agent designed for **Track 3 (US Stock AI Trading)** of the **Bitget S1 Hackathon**. The platform intercepts real-time Federal Reserve monetary policy announcements and CPI inflation indices, interprets macro sentiment indicators using server-side LLMs, and executes precise, risk-mitigated US stock and ETF portfolio reallocations.
+
+It features a high-fidelity, brutalist-themed responsive terminal complete with an interactive **Tethered Physics Custom Cursor** matching the core branding of gold and crimson orbits.
 
 ---
 
 ## 🏛️ Four-Part Project Description (Hackathon Compliance)
 
 ### Part 1: Problem Statement & US Stock Trading Experience
-Retail and institutional investors alike struggle to navigate US stock and ETF portfolios (such as **QQQ**, **SPY**, **TLT**, and **GLD**) during pivotal macroeconomic regimes. Traditional quantitative models rely on rigid, deterministic rules that fail to capture the nuanced language of Chairman Powell’s FOMC press conferences or complex market narratives.
-When a sudden "Hawkish shock" (e.g., higher-than-expected CPI inflation) hits, manual portfolio rotation is too slow, leading to heavy capital drawdowns. MitraBGT solves this by establishing a secure, fully autonomous, context-aware AI Agent loop that digests macro news and dynamically adapts asset allocations instantly.
+Active portfolio management during pivotal macroeconomic regimes is traditionally slow, error-prone, and relies on rigid, deterministic quantitative models. Such systems fail to capture the nuanced language and hawkish/dovish leanings of Chairman Jerome Powell's FOMC press conferences or complex market sentiment. 
+
+When macro news hits (e.g., higher-than-expected inflation metrics or interest rate revisions), manual rotation across indices such as **QQQ**, **SPY**, **TLT**, and **GLD** often occurs too late, resulting in severe capital drawdowns. MitraBGT resolves this latency by establishing a secure, fully autonomous, context-aware AI Agent loop that digests macro feeds, infers optimal allocations, and executes them instantly.
 
 ### Part 2: The AI-Powered Solution & Macro-Economic Strategy
-MitraBGT operates on a sound, backtested macroeconomic thesis where Federal Reserve policy is the ultimate gravity well for asset valuation:
-1. **Dovish Shifts (Policy Easing)**: Boosts growth assets due to lower capital costs. Under Dovish regimes, the engine rotates cash into interest-rate-sensitive growth equities (**QQQ** and **SPY**).
-2. **Hawkish Shifts (Policy Tightening)**: Compels defensive rotation to preserve capital. Under Hawkish regimes, the agent liquidates growth exposures in favor of defensive bond proxies (**TLT**), tokenized gold (**GLD**), or stable cash reserves (**USDT**).
-3. **Logic Validation Safety Intercept (Compliance Guard)**: A unique cognitive guardrail. If the agent receives a command to BUY high-beta growth stocks (QQQ/SPY) under a highly restrictive Hawkish environment, the loop intercepts the trade, aborts execution, and logs a documented logic mismatch error, preventing catastrophic losses.
+MitraBGT operates on a validated macroeconomic thesis where Federal Reserve interest rate policy and inflation gravity govern general market valuations:
+1. **Dovish Shifts (Policy Easing)**: Under Dovish regimes, capital costs drop, favoring growth assets. The engine dynamically rotates idle cash or defensive holdings into interest-rate-sensitive growth equities (**QQQ** and **SPY**).
+2. **Hawkish Shifts (Policy Tightening)**: High rates compel defensive rotation to preserve capital. Under Hawkish regimes, the agent liquidates high-beta growth exposures in favor of defensive bond proxies (**TLT**), tokenized gold (**GLD**), or stable cash reserves (**USDT**).
+3. **Logic Validation Safety Intercept**: To maintain rigorous compliance guardrails, if the agent attempts to purchase growth stocks during highly restrictive monetary regimes, the loop intercepts the trade, aborts execution, and logs a documented logic mismatch error—protecting capital from rogue sentiment inputs.
 
 ### Part 3: Technical Architecture & Bitget Ecosystem Integration
-MitraBGT utilizes a production-ready, full-stack architecture designed for maximum reliability and auditability:
-- **Frontend App**: React 19, Vite, Tailwind CSS, Motion (micro-animations), and Lucide Icons.
+The architecture is designed for full auditability, combining Web3-level logging with high-speed indexing:
+- **Frontend App**: React 19, Vite, Tailwind CSS, motion (fluid animations), and Lucide Icons.
 - **Backend & Event Proxy**: Node.js and Express server with a WebSocket gateway for streaming real-time Fed signals.
-- **Persistence Layer**: Multi-layer persistent storage backing state to **Google Cloud PostgreSQL (via Cloud SQL & Drizzle)** and **Firebase Firestore** with robust fallback engines.
+- **Persistence Layer**: Multi-layered persistent storage backing state to **Google Cloud PostgreSQL (via Cloud SQL & Drizzle)** and **Firebase Firestore** with local JSON file fallbacks.
 - **Bitget Agent Hub Integration**: Custom adapter (`BitgetAdapter.ts`) that maps model inferences to standard Bitget schemas. All simulated trade actions are translated into the official **Bitget Transaction format** (verifiable via unique Bitget API Log IDs).
-- **Interactive Navigation**: The dashboard features a clean, brutalist-themed responsive navigation header allowing judges to seamlessly hop between the main **Agent Terminal**, **Live Portfolio NAV**, **Fed Signals Feed**, and **Cryptographic Audit Logs**.
+- **Interactive Navigation**: Seamless navigation across the **Agent Terminal**, **Live Portfolio NAV**, **Fed Signals Feed**, and **Cryptographic Audit Logs**.
 
 ### Part 4: Our Take on AI Trading & Future Outlook
-AI is redefining quantitative trading from numeric-only signals to multi-modal cognitive pipelines. By combining LLM-based linguistic comprehension with algorithmic risk management, we can bridge the gap between human sentiment and high-frequency markets. Our future expansion involves directly linking our **BitgetAdapter** to live brokerages via the **Bitget Agent Hub MCP Server**, enabling fully authorized, non-custodial capital rotation across traditional ETFs and tokenized US equities.
+AI is shifting quantitative trading from purely numerical indicators to multi-modal cognitive loops. By joining LLM-based linguistic comprehension with deterministic safety guardrails, we bridge the gap between human language and high-speed execution. Our future vision directly couples the **BitgetAdapter** to live brokerage accounts via the **Bitget Agent Hub Model Context Protocol (MCP) Server**, enabling secure, non-custodial capital rotation across traditional ETFs and tokenized US equities.
+
+---
+
+## 🛠️ System Architecture Diagram
+
+```
+                       [Real-Time Macro Feeds]
+                     (FOMC Speeches, CPI Prints)
+                                  │
+                                  ▼
+                     ┌─────────────────────────┐
+                     │   Express Proxy Server  │
+                     └────────────┬────────────┘
+                                  │
+         ┌────────────────────────┴────────────────────────┐
+         ▼                                                 ▼
+┌──────────────────┐                              ┌──────────────────┐
+│ Gemini API (LLM) │                              │ WebSocket Server │
+│ Macro Sentiment  │                              │ Live Broadcasts  │
+└────────┬─────────┘                              └────────┬─────────┘
+         │                                                 │
+         ├─────────────────────────────────────────────────┘
+         ▼
+┌──────────────────────────────────────────────────────────┐
+│              MitraBGT Agent Decision Engine              │
+│    (Asset Reallocation Logic & Safety Intercept Guard)   │
+└────────────────────────┬─────────────────────────────────┘
+                         │
+         ┌───────────────┼────────────────┬───────────────┐
+         ▼               ▼                ▼               ▼
+  ┌─────────────┐ ┌─────────────┐  ┌─────────────┐ ┌─────────────┐
+  │  Firestore  │ │  Cloud SQL  │  │ Bitget Hub  │ │ Local Cache │
+  │ (Persistent)│ │(PostgreSQL) │  │  (Orders)   │ │ (Fallback)  │
+  └─────────────┘ └─────────────┘  └─────────────┘ └─────────────┘
+```
 
 ---
 
@@ -41,35 +79,101 @@ All trade logs executed by the autonomous engine are formatted according to the 
 
 ---
 
-## 🛠️ Installation & Run Guide
+## 🎮 Custom Tethered Physics Cursor
+To reflect our core design branding, we have replaced the default cursor on desktop with a **Tethered Gravity Cursor** modeled after the user-supplied reference:
+- **Lead Target (White Dot)**: Moves instantly with the pointer coordinates to guarantee pixel-perfect UI clicking and interactive control.
+- **Trailing Mass (Crimson & Gold Orb on a Base Block)**: Follows the lead target with physics-based spring dampening, simulating a heavy kinetic anchor.
+- **Tension Tether (Dashed Line)**: Stretches dynamically between the target and the mass, indicating momentum, speed, and real-time inertia.
+- Hovering over buttons/links causes the leading dot to glow with an amber scale transition, while the orb tilts in physical response.
+
+---
+
+## 🚀 Deployment Guide (Vercel vs. Containers)
+
+As a full-stack dashboard featuring **WebSockets**, a stateful **background broadcast loop** (polling news every 20 seconds), and persistent server-side caching, the deployment strategy has a few important constraints depending on your provider:
+
+### Model A: Container-Based Hosting (Recommended: Render, Railway, Cloud Run)
+Because MitraBGT runs a persistent WebSockets server (`ws`) and a continuous scheduling loop, **deploying the entire app as a unified container is the easiest, most robust method.**
+
+1. **Vite + Express Bundle**: When you run `npm run build`, Vite compiles the frontend into `dist/`, and `esbuild` compiles the backend server into a single bundled Node file `dist/server.cjs`.
+2. **Setup on Render/Railway**:
+   - Create a new **Web Service** pointed to your repository.
+   - Set the Build Command to `npm run build`.
+   - Set the Start Command to `npm start`.
+   - Add your environment variables (detailed below).
+   - *Result*: Your persistent WebSocket connections, background schedulers, and Express API endpoints will run continuously with 100% uptime.
+
+---
+
+### Model B: Vercel Deployment (Decoupled Model)
+Vercel is a **serverless** platform designed for stateless, short-lived executions.
+> ⚠️ **Important Caveats on Serverless Platforms:**
+> - **WebSockets**: Vercel Serverless Functions do **NOT** support persistent WebSockets (`ws`). If you deploy on Vercel, the websocket gateway connection will close after 10-60 seconds. The client will gracefully fallback to regular REST calls, but real-time push events are disabled.
+> - **Continuous Intervals**: `setInterval` loops do not run continuously on Vercel because the Node instance shuts down as soon as the HTTP response is completed.
+> - **Local Cache**: Fallback file storage (`data/trade_logs.json`) will be erased whenever Vercel spins down the serverless container. You **must** configure Firebase or PostgreSQL (Cloud SQL) for persistent storage.
+
+If you choose to deploy on Vercel, follow these steps:
+
+#### Step 1: Split Frontend & Backend (Recommended for Vercel)
+1. Deploy the **Frontend Static Assets** to Vercel (point build settings to `dist/` with Build Command: `npm run build`).
+2. Deploy the **Express Backend** to Render, Railway, or Google Cloud Run.
+3. Set the environment variable `VITE_BACKEND_URL` on Vercel to point to your hosted backend url (e.g. `https://mitrabgt-backend.onrender.com`), allowing the frontend to make remote REST/WS requests securely.
+
+#### Step 2: Serverless Mono-Repo Config (Alternative Vercel-Only Setup)
+If you deploy the entire monorepo directly to Vercel:
+1. Provide a `vercel.json` in the root mapping all `/api/*` requests to your Express backend:
+```json
+{
+  "version": 2,
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/server.ts" },
+    { "source": "/(.*)", "destination": "/dist/$1" }
+  ]
+}
+```
+2. Note that WebSockets and persistent background interval news cycles will be inactive in this mode.
+
+---
+
+## 🔑 Environment Variables Setup
+You must supply the following credentials to your deployment panel (Vercel, Render, or Railway) or your local `.env` file:
+
+```env
+# Google Gemini API Key (Mandatory for AI Macro interpretation and sentiment synthesis)
+GEMINI_API_KEY="AIzaSy..."
+
+# Bitget API Management credentials (Used to mock secure Bitget Hub trading API keys)
+BITGET_API_KEY="bg-mcp-sandbox-demo-key-2026"
+BITGET_API_SECRET="bg-mcp-sandbox-secret-abc"
+
+# Relational Database URL (Optional: For PostgreSQL Drizzle backend)
+DATABASE_URL="postgresql://user:password@host:5432/db"
+
+# Firebase Config (Optional: If utilizing Firebase Firestore as your persistent engine)
+FIREBASE_PROJECT_ID="your-firebase-project-id"
+FIREBASE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBg..."
+FIREBASE_CLIENT_EMAIL="firebase-adminsdk@..."
+```
+
+---
+
+## ⚙️ Running Locally
 
 ### 1. Clone & Install Dependencies
 ```bash
 npm install
 ```
 
-### 2. Set Up Environment Variables
-Create a `.env` file in the project root:
-```env
-# Google Gemini API (Required for server-side macro synthesis)
-GEMINI_API_KEY="your-gemini-api-key"
-
-# Bitget API Management credentials
-BITGET_API_KEY="your-bitget-api-key"
-BITGET_SECRET_KEY="your-bitget-secret-key"
-BITGET_PASSPHRASE="your-bitget-passphrase"
-```
-
-### 3. Run in Development
-Launch the Express proxy backend and Vite frontend together:
+### 2. Run in Development Mode
+Launches the Express server and Vite in tandem:
 ```bash
 npm run dev
 ```
 
-### 4. Build & Start in Production
-Compile both frontend assets and the bundled CommonJS server:
+### 3. Build & Run in Production
+Compiles frontend assets and bundles the Node server for distribution:
 ```bash
 npm run build
 npm start
 ```
-The server will boot on port `3000` bound to host `0.0.0.0`, fully optimized for Cloud Run or virtual container deploys.
+The server will bind to `http://localhost:3000`, matching all target environment setups.

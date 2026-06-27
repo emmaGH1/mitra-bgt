@@ -1,0 +1,6 @@
+{
+  "name": "MitraBGT Agent Dashboard",
+  "description": "Autonomous Fed Signals-Based AI Rebalancing Trading Dashboard for tokenized RWAs and Cryptocurrencies.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

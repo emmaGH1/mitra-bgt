@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Baloo+2:wght@600;700;800&family=Fredoka:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-display: "Luckiest Guy", cursive;
+  --font-sans: "Fredoka", sans-serif;
+  
+  --color-cream: #F5E3CD;
+  --color-red: #F91814;
+  --color-ink: #1B1B1B;
+  --color-ink-light: #2A2A2A;
+  --color-yellow: #FFD750;
+  --color-amber: #F4A804;
+  --color-mint: #1FB57A;
+  --color-maroon: #4C0016;
+}
+
+body {
+  background-color: var(--color-cream);
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+/* Ensure body dark mode switches background and text */
+html.dark body {
+  background-color: var(--color-ink);
+  color: var(--color-cream);
+}
+
+/* Hide default cursor on desktop ONLY when custom cursor option is toggled active */
+@media (pointer: fine) {
+  html.custom-cursor-enabled, 
+  html.custom-cursor-enabled body, 
+  html.custom-cursor-enabled button, 
+  html.custom-cursor-enabled a, 
+  html.custom-cursor-enabled select, 
+  html.custom-cursor-enabled input, 
+  html.custom-cursor-enabled textarea, 
+  html.custom-cursor-enabled [role="button"], 
+  html.custom-cursor-enabled .cursor-pointer {
+    cursor: none !important;
+  }
+}
+
+/* Custom stroke and border classes to match cravburgers styling */
+.outline-text {
+  -webkit-text-stroke: 2px #ffffff;
+  paint-order: stroke fill;
+}
+
+.outline-text-heavy {
+  -webkit-text-stroke: 4px #ffffff;
+  paint-order: stroke fill;
+}
+

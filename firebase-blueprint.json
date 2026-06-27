@@ -1,0 +1,47 @@
+{
+  "entities": {
+    "TradeLog": {
+      "title": "TradeLog",
+      "description": "Log of executed stock rebalancing trades",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique trade ID" },
+        "timestamp": { "type": "string", "format": "date-time", "description": "Timestamp of trade execution" },
+        "asset": { "type": "string", "description": "Asset symbol, e.g., QQQ, SPY" },
+        "action": { "type": "string", "enum": ["BUY", "SELL", "HOLD", "SYSTEM_SAFETY_ABORT"], "description": "Action performed" },
+        "price": { "type": "number", "description": "Execution unit price in USD" },
+        "quantity": { "type": "number", "description": "Quantity traded" },
+        "value": { "type": "number", "description": "Total value of trade" },
+        "rationale": { "type": "string", "description": "Rationale behind the rebalancing decision" },
+        "txHash": { "type": "string", "description": "Verifiable blockchain / ledger matching hash" }
+      },
+      "required": ["id", "timestamp", "asset", "action", "price", "quantity", "value", "rationale", "txHash"]
+    },
+    "SignalLog": {
+      "title": "SignalLog",
+      "description": "Historical Fed news policy / macroeconomic alerts",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique signal ID" },
+        "timestamp": { "type": "string", "format": "date-time", "description": "Timestamp of alert interception" },
+        "source": { "type": "string", "description": "Source of alert, e.g., Bloomberg, FOMC Minutes" },
+        "headline": { "type": "string", "description": "Text headline of the intercepted alert" },
+        "sentiment": { "type": "string", "enum": ["dovish", "hawkish", "neutral"], "description": "Sentiment class" },
+        "score": { "type": "number", "description": "Dovishness score from -1.0 to 1.0" },
+        "interpretation": { "type": "string", "description": "Macro analyst interpretation" },
+        "recommendedAllocation": { "type": "object", "description": "Map of recommended asset symbol to allocation percentage" }
+      },
+      "required": ["id", "timestamp", "source", "headline", "sentiment", "score", "interpretation", "recommendedAllocation"]
+    }
+  },
+  "firestore": {
+    "/trade_logs/{logId}": {
+      "schema": "TradeLog",
+      "description": "Historical stock rebalancing trade logs"
+    },
+    "/signals_log/{signalId}": {
+      "schema": "SignalLog",
+      "description": "Macroeconomic sentiment signals stream"
+    }
+  }
+}

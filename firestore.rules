@@ -1,0 +1,61 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Global Safety Net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions for validation
+    function isValidId(id) {
+      return id is string && id.size() <= 128;
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    // Schema Validation Helpers
+    function isValidTradeLog(data) {
+      return data.keys().hasAll(['id', 'timestamp', 'asset', 'action', 'price', 'quantity', 'value', 'rationale', 'txHash'])
+        && data.id is string && data.id.size() <= 128
+        && data.asset is string && data.asset.size() <= 64
+        && (data.action == 'BUY' || data.action == 'SELL' || data.action == 'HOLD' || data.action == 'SYSTEM_SAFETY_ABORT')
+        && (data.price is int || data.price is float)
+        && (data.quantity is int || data.quantity is float)
+        && (data.value is int || data.value is float)
+        && data.rationale is string && data.rationale.size() <= 50000
+        && data.txHash is string && data.txHash.size() <= 512;
+    }
+
+    function isValidSignalLog(data) {
+      return data.keys().hasAll(['id', 'timestamp', 'source', 'headline', 'sentiment', 'score', 'interpretation', 'recommendedAllocation'])
+        && data.id is string && data.id.size() <= 128
+        && data.source is string && data.source.size() <= 256
+        && data.headline is string && data.headline.size() <= 10000
+        && (data.sentiment == 'dovish' || data.sentiment == 'hawkish' || data.sentiment == 'neutral')
+        && (data.score is int || data.score is float) && data.score >= -1.0 && data.score <= 1.0
+        && data.interpretation is string && data.interpretation.size() <= 50000
+        && data.recommendedAllocation is map;
+    }
+
+    // Trade Logs Collection rules
+    match /trade_logs/{logId} {
+      allow read: if true;
+      allow create: if isValidId(logId) && isValidTradeLog(incoming()) && incoming().id == logId;
+      allow update, delete: if false; // Logs are immutable once created
+    }
+
+    // Signals Log Collection rules
+    match /signals_log/{signalId} {
+      allow read: if true;
+      allow create: if isValidId(signalId) && isValidSignalLog(incoming()) && incoming().id == signalId;
+      allow update, delete: if false; // Signals are immutable once created
+    }
+  }
+}
